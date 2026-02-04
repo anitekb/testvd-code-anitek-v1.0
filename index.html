@@ -152,12 +152,26 @@ This is just the beginning of many beautiful chapters with you.
 
 <script>
 
-/* START MUSIC AFTER FIRST CLICK */
+/* 🎵 START PERFECT SONG WITH FADE IN */
 function startMusic(){
-    document.getElementById("perfectSong").play();
+
+    let perfect = document.getElementById("perfectSong");
+
+    perfect.currentTime = 42; // emotional part start
+    perfect.volume = 0;
+
+    perfect.play();
+
+    let fade = setInterval(()=>{
+        if(perfect.volume < 0.8){
+            perfect.volume += 0.05;
+        } else {
+            clearInterval(fade);
+        }
+    },200);
 }
 
-/* PAGE SWITCH + SONG CONTROL */
+/* PAGE SWITCH + MUSIC CONTROL */
 function nextPage(page){
 
     document.querySelectorAll(".page")
@@ -169,15 +183,32 @@ function nextPage(page){
     let perfect = document.getElementById("perfectSong");
     let tum = document.getElementById("tumSaathHo");
 
+    /* Bollywood Scene */
     if(page === 3){
-        perfect.pause();
+
+        fadeOut(perfect);
+
         tum.currentTime = 0;
+        tum.volume = 1;
         tum.play();
 
         tum.onended = function(){
-            perfect.play();
+            startMusic();
         };
     }
+}
+
+/* SMOOTH FADE OUT FUNCTION */
+function fadeOut(audio){
+
+    let fade = setInterval(()=>{
+        if(audio.volume > 0.1){
+            audio.volume -= 0.05;
+        } else {
+            audio.pause();
+            clearInterval(fade);
+        }
+    },200);
 }
 
 /* YES BUTTON */
