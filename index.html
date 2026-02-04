@@ -2,6 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- 📱 Mobile Responsive Tag -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For MD ❤️</title>
 
 <style>
@@ -15,6 +19,8 @@ body{
     overflow:hidden;
 }
 
+/* Pages */
+
 .page{
     position:absolute;
     width:100%;
@@ -24,18 +30,36 @@ body{
     align-items:center;
     flex-direction:column;
     padding:20px;
+    box-sizing:border-box;
 }
 
 .active{
     display:flex;
 }
 
+/* Text Mobile Scaling */
+
+h1{
+    font-size:clamp(26px,6vw,40px);
+}
+
+h2{
+    font-size:clamp(18px,5vw,28px);
+}
+
+p{
+    font-size:clamp(16px,4vw,20px);
+    max-width:600px;
+}
+
+/* Buttons */
+
 button{
-    padding:14px 28px;
-    font-size:20px;
+    padding:14px 24px;
+    font-size:18px;
     border:none;
-    border-radius:10px;
-    margin-top:25px;
+    border-radius:12px;
+    margin-top:20px;
     cursor:pointer;
 }
 
@@ -55,9 +79,11 @@ button{
     position:absolute;
 }
 
+/* Floating Hearts */
+
 .heart{
     position:absolute;
-    font-size:22px;
+    font-size:20px;
     animation: float 6s linear infinite;
 }
 
@@ -77,28 +103,23 @@ button{
 
 <body>
 
-<!-- 🎵 PERFECT BACKGROUND SONG -->
+<!-- 🎵 PERFECT SONG -->
 <audio id="perfectSong" loop>
     <source src="PerfectEd.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 🎬 BOLLYWOOD SONG -->
-<audio id="tumSaathHo">
-    <source src="ATSH.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
 <h1>MD, Qtu Babbyy ❤️</h1>
 <h2>There is something I want to tell you...</h2>
-<button class="next" onclick="startMusic(); nextPage(2)">Click to Continue</button>
+<button class="next" onclick="startMusic(); nextPage(2)">Tap to Continue</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="page2" style="background:linear-gradient(to right,#141e30,#243b55)">
 <h1>From the day you entered my life...</h1>
 
-<p style="max-width:600px;font-size:20px">
+<p>
 You turned ordinary moments into beautiful memories.  
 You became my calm in chaos, my smile in sadness,  
 and my happiness in everything ❤️
@@ -112,14 +133,13 @@ and my happiness in everything ❤️
 
 <h1>Filmy confession time 🎬</h1>
 
-<p style="max-width:650px;font-size:22px">
+<p>
 Agar life ek movie hoti na...  
 Toh meri favourite scene woh hota  
 jahan tum meri life mein entry karti ❤️  
 
-Aur background mein sirf ek gaana bajta...
-
-"Tum Saath Ho..."  
+Aur meri life ka background music hamesha  
+sirf tum hi rahogi...
 </p>
 
 <button class="next" onclick="nextPage(4)">One Last Thing...</button>
@@ -141,7 +161,7 @@ Aur background mein sirf ek gaana bajta...
 
 <h1 class="gold">You just made my world brighter 💎</h1>
 
-<p style="font-size:24px;max-width:600px">
+<p>
 This is just the beginning of many beautiful chapters with you.
 </p>
 
@@ -151,12 +171,12 @@ This is just the beginning of many beautiful chapters with you.
 
 <script>
 
-/* START PERFECT SONG */
+/* Start music (mobile safe) */
 function startMusic(){
     document.getElementById("perfectSong").play();
 }
 
-/* PAGE SWITCH */
+/* Page switching */
 function nextPage(page){
 
     document.querySelectorAll(".page")
@@ -164,36 +184,29 @@ function nextPage(page){
 
     document.getElementById("page"+page)
     .classList.add("active");
-
-    let perfect = document.getElementById("perfectSong");
-    let tum = document.getElementById("tumSaathHo");
-
-    /* Bollywood Scene */
-    if(page === 3){
-        perfect.pause();
-        tum.currentTime = 0;
-        tum.play();
-
-        tum.onended = function(){
-            perfect.play();
-        };
-    }
 }
 
-/* YES BUTTON */
+/* YES click */
 function yesClicked(){
     nextPage(5);
 }
 
-/* MOVING NO BUTTON */
+/* Mobile-safe moving NO button */
 const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover",()=>{
-    noBtn.style.left=Math.random()*400+"px";
-    noBtn.style.top=Math.random()*300+"px";
-});
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
 
-/* FLOATING HEARTS */
+function moveNo(){
+
+    let maxX = window.innerWidth - 120;
+    let maxY = window.innerHeight - 80;
+
+    noBtn.style.left = Math.random()*maxX + "px";
+    noBtn.style.top = Math.random()*maxY + "px";
+}
+
+/* Floating hearts */
 setInterval(()=>{
     let heart=document.createElement("div");
     heart.className="heart";
@@ -206,7 +219,7 @@ setInterval(()=>{
 
     setTimeout(()=>heart.remove(),6000);
 
-},500);
+},600);
 
 </script>
 
