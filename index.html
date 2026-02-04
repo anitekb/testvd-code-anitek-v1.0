@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Proposal</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background:#ffe6f0;
+    padding-top:100px;
+}
+
+.container{
+    position:relative;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin:10px;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#no{
+    background:#999;
+    color:white;
+    position:absolute;
+}
+
+img{
+    width:250px;
+    margin-bottom:20px;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my Valentine ❤️ ?</h1>
+
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+
+    <br>
+
+    <button id="yes" onclick="accepted()">Yes 💕</button>
+    <button id="no">No 😢</button>
+
+    <h2 id="message" class="hidden">Yayyyyy!!! I love you ❤️🥰</h2>
+</div>
+
+<script>
+
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover", function(){
+    noBtn.style.left = Math.random()*300 + "px";
+    noBtn.style.top = Math.random()*200 + "px";
+});
+
+function accepted(){
+    document.getElementById("message").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
