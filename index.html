@@ -28,9 +28,7 @@ body{
     box-sizing:border-box;
 }
 
-.active{
-    display:flex;
-}
+.active{ display:flex; }
 
 h1{ font-size:clamp(26px,6vw,40px); }
 h2{ font-size:clamp(18px,5vw,28px); }
@@ -53,6 +51,8 @@ button{
     color:white;
     position:absolute;
 }
+
+/* Floating hearts */
 
 .heart{
     position:absolute;
@@ -87,12 +87,12 @@ button{
 
 <body>
 
-<!-- 🎵 PERFECT SONG -->
+<!-- 🎵 Perfect Song -->
 <audio id="perfectSong" loop>
     <source src="PerfectEd.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1 FUNNY INTRO -->
+<!-- PAGE 1 FUNNY -->
 <div class="page active" id="page1">
 
 <h1>⚠️ Warning MD, Qtu Babbyy ⚠️</h1>
@@ -155,16 +155,14 @@ sirf tum hi rahogi...
 
 </div>
 
-<!-- PAGE 5 FINAL WITH BOUNCING PHOTOS -->
+<!-- PAGE 5 FINAL -->
 <div class="page" id="page5" style="background:black">
 
 <h1 class="gold">You just made my world brighter 💎</h1>
-
 <h2>❤️ I Love You MD ❤️</h2>
 
-<!-- Replace these photo names later -->
-<img src="IMG_1866.jpg" class="photo" id="IMG_1866">
-<img src="IMG_2100.jpg" class="photo" id="IMG_2100">
+<img src="photo1.jpg" class="photo" id="photo1">
+<img src="photo2.jpg" class="photo" id="photo2">
 
 </div>
 
@@ -202,7 +200,7 @@ noBtn.addEventListener("mouseover",moveNo);
 
 function moveNo(){
     let maxX = window.innerWidth - 120;
-    let maxY = window.innerHeight - 80;
+    let maxY = window.innerHeight - 120;
 
     noBtn.style.left = Math.random()*maxX + "px";
     noBtn.style.top = Math.random()*maxY + "px";
@@ -223,12 +221,11 @@ setInterval(()=>{
 
 },600);
 
-/* Bouncing photos */
+/* Bouncing Photos */
 
 function startBouncing(){
-
-    bounce("IMG_1866",3,2);
-    bounce("IMG_2100",-2,3);
+    bounce("photo1",3,2);
+    bounce("photo2",-2,3);
 }
 
 function bounce(id,dx,dy){
