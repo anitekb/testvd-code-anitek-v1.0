@@ -37,7 +37,6 @@ button{
     border-radius:10px;
     margin-top:25px;
     cursor:pointer;
-    transition:0.3s;
 }
 
 .next{
@@ -78,7 +77,7 @@ button{
 
 <body>
 
-<!-- 🎵 MAIN SONG -->
+<!-- 🎵 PERFECT BACKGROUND SONG -->
 <audio id="perfectSong" loop>
     <source src="PerfectEd.mp3" type="audio/mpeg">
 </audio>
@@ -88,14 +87,14 @@ button{
     <source src="ATSH.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1 INTRO -->
+<!-- PAGE 1 -->
 <div class="page active" id="page1">
 <h1>MD, Qtu Babbyy ❤️</h1>
 <h2>There is something I want to tell you...</h2>
 <button class="next" onclick="startMusic(); nextPage(2)">Click to Continue</button>
 </div>
 
-<!-- PAGE 2 EMOTIONAL -->
+<!-- PAGE 2 -->
 <div class="page" id="page2" style="background:linear-gradient(to right,#141e30,#243b55)">
 <h1>From the day you entered my life...</h1>
 
@@ -108,7 +107,7 @@ and my happiness in everything ❤️
 <button class="next" onclick="nextPage(3)">Continue ❤️</button>
 </div>
 
-<!-- PAGE 3 BOLLYWOOD -->
+<!-- PAGE 3 -->
 <div class="page" id="page3" style="background:linear-gradient(to right,#3a1c71,#d76d77,#ffaf7b)">
 
 <h1>Filmy confession time 🎬</h1>
@@ -126,7 +125,7 @@ Aur background mein sirf ek gaana bajta...
 <button class="next" onclick="nextPage(4)">One Last Thing...</button>
 </div>
 
-<!-- PAGE 4 PROPOSAL -->
+<!-- PAGE 4 -->
 <div class="page" id="page4" style="background:#ffe6f0;color:#99004d">
 
 <h1>MD, Qtu Babbyy 🧸</h1>
@@ -137,7 +136,7 @@ Aur background mein sirf ek gaana bajta...
 
 </div>
 
-<!-- PAGE 5 END -->
+<!-- PAGE 5 -->
 <div class="page" id="page5" style="background:black">
 
 <h1 class="gold">You just made my world brighter 💎</h1>
@@ -152,26 +151,12 @@ This is just the beginning of many beautiful chapters with you.
 
 <script>
 
-/* 🎵 START PERFECT SONG WITH FADE IN */
+/* START PERFECT SONG */
 function startMusic(){
-
-    let perfect = document.getElementById("perfectSong");
-
-    perfect.currentTime = 42; // emotional part start
-    perfect.volume = 0;
-
-    perfect.play();
-
-    let fade = setInterval(()=>{
-        if(perfect.volume < 0.8){
-            perfect.volume += 0.05;
-        } else {
-            clearInterval(fade);
-        }
-    },200);
+    document.getElementById("perfectSong").play();
 }
 
-/* PAGE SWITCH + MUSIC CONTROL */
+/* PAGE SWITCH */
 function nextPage(page){
 
     document.querySelectorAll(".page")
@@ -185,30 +170,14 @@ function nextPage(page){
 
     /* Bollywood Scene */
     if(page === 3){
-
-        fadeOut(perfect);
-
+        perfect.pause();
         tum.currentTime = 0;
-        tum.volume = 1;
         tum.play();
 
         tum.onended = function(){
-            startMusic();
+            perfect.play();
         };
     }
-}
-
-/* SMOOTH FADE OUT FUNCTION */
-function fadeOut(audio){
-
-    let fade = setInterval(()=>{
-        if(audio.volume > 0.1){
-            audio.volume -= 0.05;
-        } else {
-            audio.pause();
-            clearInterval(fade);
-        }
-    },200);
 }
 
 /* YES BUTTON */
@@ -216,7 +185,7 @@ function yesClicked(){
     nextPage(5);
 }
 
-/* RUNNING NO BUTTON */
+/* MOVING NO BUTTON */
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
