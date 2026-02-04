@@ -1,79 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Valentine Proposal</title>
+<title>For MD ❤️</title>
 
 <style>
+
 body{
-    font-family: Arial, sans-serif;
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:black;
+    color:white;
     text-align:center;
-    background:#ffe6f0;
-    padding-top:100px;
+    overflow:hidden;
 }
 
-.container{
-    position:relative;
+.page{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.active{
+    display:flex;
 }
 
 button{
-    padding:12px 25px;
-    font-size:18px;
+    padding:14px 28px;
+    font-size:20px;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
+    margin-top:25px;
     cursor:pointer;
-    margin:10px;
+    transition:0.3s;
 }
 
-#yes{
+.next{
     background:#ff4d6d;
     color:white;
 }
 
-#no{
-    background:#999;
+.yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+.no{
+    background:#555;
     color:white;
     position:absolute;
 }
 
-img{
-    width:250px;
-    margin-bottom:20px;
+.heart{
+    position:absolute;
+    font-size:22px;
+    animation: float 6s linear infinite;
 }
 
-.hidden{
-    display:none;
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-800px);opacity:0;}
 }
+
+.gold{
+    background:linear-gradient(45deg,gold,#ffcc00);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Will you be my Valentine ❤️ ?</h1>
+<!-- 🎵 MAIN SONG -->
+<audio id="perfectSong" loop>
+    <source src="PerfectEd.mp3" type="audio/mpeg">
+</audio>
 
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+<!-- 🎬 BOLLYWOOD SONG -->
+<audio id="tumSaathHo">
+    <source src="ATSH.mp3" type="audio/mpeg">
+</audio>
 
-    <br>
+<!-- PAGE 1 INTRO -->
+<div class="page active" id="page1">
+<h1>MD, Qtu Babbyy ❤️</h1>
+<h2>There is something I want to tell you...</h2>
+<button class="next" onclick="startMusic(); nextPage(2)">Click to Continue</button>
+</div>
 
-    <button id="yes" onclick="accepted()">Yes 💕</button>
-    <button id="no">No 😢</button>
+<!-- PAGE 2 EMOTIONAL -->
+<div class="page" id="page2" style="background:linear-gradient(to right,#141e30,#243b55)">
+<h1>From the day you entered my life...</h1>
 
-    <h2 id="message" class="hidden">Yayyyyy!!! I love you ❤️🥰</h2>
+<p style="max-width:600px;font-size:20px">
+You turned ordinary moments into beautiful memories.  
+You became my calm in chaos, my smile in sadness,  
+and my happiness in everything ❤️
+</p>
+
+<button class="next" onclick="nextPage(3)">Continue ❤️</button>
+</div>
+
+<!-- PAGE 3 BOLLYWOOD -->
+<div class="page" id="page3" style="background:linear-gradient(to right,#3a1c71,#d76d77,#ffaf7b)">
+
+<h1>Filmy confession time 🎬</h1>
+
+<p style="max-width:650px;font-size:22px">
+Agar life ek movie hoti na...  
+Toh meri favourite scene woh hota  
+jahan tum meri life mein entry karti ❤️  
+
+Aur background mein sirf ek gaana bajta...
+
+"Tum Saath Ho..."  
+</p>
+
+<button class="next" onclick="nextPage(4)">One Last Thing...</button>
+</div>
+
+<!-- PAGE 4 PROPOSAL -->
+<div class="page" id="page4" style="background:#ffe6f0;color:#99004d">
+
+<h1>MD, Qtu Babbyy 🧸</h1>
+<h2>Will you be my Valentine? ❤️</h2>
+
+<button class="yes" onclick="yesClicked()">Yes 💕</button>
+<button class="no" id="noBtn">No 😢</button>
+
+</div>
+
+<!-- PAGE 5 END -->
+<div class="page" id="page5" style="background:black">
+
+<h1 class="gold">You just made my world brighter 💎</h1>
+
+<p style="font-size:24px;max-width:600px">
+This is just the beginning of many beautiful chapters with you.
+</p>
+
+<h2>❤️ I Love You MD ❤️</h2>
+
 </div>
 
 <script>
 
-const noBtn = document.getElementById("no");
+/* START MUSIC AFTER FIRST CLICK */
+function startMusic(){
+    document.getElementById("perfectSong").play();
+}
 
-noBtn.addEventListener("mouseover", function(){
-    noBtn.style.left = Math.random()*300 + "px";
-    noBtn.style.top = Math.random()*200 + "px";
+/* PAGE SWITCH + SONG CONTROL */
+function nextPage(page){
+
+    document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+    document.getElementById("page"+page)
+    .classList.add("active");
+
+    let perfect = document.getElementById("perfectSong");
+    let tum = document.getElementById("tumSaathHo");
+
+    if(page === 3){
+        perfect.pause();
+        tum.currentTime = 0;
+        tum.play();
+
+        tum.onended = function(){
+            perfect.play();
+        };
+    }
+}
+
+/* YES BUTTON */
+function yesClicked(){
+    nextPage(5);
+}
+
+/* RUNNING NO BUTTON */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.left=Math.random()*400+"px";
+    noBtn.style.top=Math.random()*300+"px";
 });
 
-function accepted(){
-    document.getElementById("message").classList.remove("hidden");
-}
+/* FLOATING HEARTS */
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.bottom="0px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+
+},500);
 
 </script>
 
